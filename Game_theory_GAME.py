@@ -7,25 +7,26 @@ class Prisoner:
 			print(f'They both betray, both get 2 years.\n')
 			Game_History_P1.append('B')
 			Game_History_P1.append('B')
+			P1_sentence += 2
+			P2_sentence += 2
 		elif P1_decision == 'B' and P2_decision == 'S':
 			print(f'Prisoner 1 is faces no charge, prisoner 2 gets 3 years\n')
 			Game_History_P1.append('B')
 			Game_History_P2.append('S')
+			P2_sentence += 3
 		elif P1_decision == 'S' and P2_decision == 'B':
 			print(f'Prisoner 2 is faces no charge, prisoner 1 gets 3 years\n')
 			Game_History_P1.append('S')
 			Game_History_P2.append('B')
+			P1_sentence += 3
 		elif P1_decision == 'S' and P2_decision == 'S':
 			print(f'They both stay silent, both get 1 year\n')
 			Game_History_P1.append('S')
 			Game_History_P2.append('S')
+			P1_sentence += 1
+			P2_sentence += 1
 		else:
 			print('there is an error')
-			
-	def play_many_games(self):
-		for i in range(self.amount_of_games):
-			self.game('B','B')
-			
 class Player:
 	def __init__(self):
 		pass
@@ -47,8 +48,6 @@ def randy(game_list):
 
 	
 	
-
-
 Game_History_P1  = []
 Game_History_P2 = []
 P1_sentence = 0
