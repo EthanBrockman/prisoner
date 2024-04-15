@@ -1,4 +1,4 @@
-from project_game_test import *
+from Game_theory_GAME import *
 
 print(f'Game Theory is the study of strategy of rational agents and the strategies they use.\n')
 print('You are going to be playing a type of Game Theory game called Prisoners Dilemma.')
