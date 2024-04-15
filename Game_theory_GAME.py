@@ -21,12 +21,12 @@ class Prisoner:
 			P1_sentence += 2
 			P2_sentence += 2
 		elif P1_decision == 'B' and P2_decision == 'S':
-			print(f'Prisoner 1 is faces no charge, prisoner 2 gets 3 years\n')
+			print(f'Prisoner 1 faces no charge, prisoner 2 gets 3 years\n')
 			Game_History_P1.append('B')
 			Game_History_P2.append('S')
 			P2_sentence += 3
 		elif P1_decision == 'S' and P2_decision == 'B':
-			print(f'Prisoner 2 is faces no charge, prisoner 1 gets 3 years\n')
+			print(f'Prisoner 2 faces no charge, prisoner 1 gets 3 years\n')
 			Game_History_P1.append('S')
 			Game_History_P2.append('B')
 			P1_sentence += 3
@@ -39,16 +39,48 @@ class Prisoner:
 		else:
 			print('there is an error')
 		
-	def play_many_games(self):
+	def play_many_games(self, P1, P2):
 		#performs mutiple games depending on the amount listed by the user
 		for i in range(self.amount_of_games):
-			self.game(tit_for_tat(Game_History_P2),randy(Game_History_P1))
+			self.game(P1.player_choice(), P2.player_choice())
+			
 class Player:
-	def __init__(self):
-		pass
+	def __init__(self, choice, player_number):
+		self.decision_history = [] # creates an empty list to keep track of the player's decision in each round
+		self.choice = choice
+		self.player_number = player_number
 	
+	def player_choice(self):
+		global Game_History_P1, Game_History_P2
+		if self.player_number == 1:
+			if self.choice == 1:
+				return(always_betray(Game_History_P2))
+			elif self.choice == 2:
+				return(always_silent(Game_History_P2))
+			elif self.choice == 3:
+				return(tit_for_tat(Game_History_P2))
+			elif self.choice == 4:
+				return(beat_last(Game_History_P2))
+			elif self.choice == 5:
+				return(no_mercy(Game_History_P2))
+			elif self.choice == 6:
+				return(randy(Game_History_P2))
+		elif self.player_number == 2:
+			if self.choice == 1:
+				return(always_betray(Game_History_P1))
+			elif self.choice == 2:
+				return(always_silent(Game_History_P1))
+			elif self.choice == 3:
+				return(tit_for_tat(Game_History_P1))
+			elif self.choice == 4:
+				return(beat_last(Game_History_P1))
+			elif self.choice == 5:
+				return(no_mercy(Game_History_P1))
+			elif self.choice == 6:
+				return(randy(Game_History_P1))
+		
 	
-	
+		
 def always_betray(game_list):
 	# always chooses the betray option
 	return('B')
@@ -86,7 +118,5 @@ def randy(game_list):
 		return('B')
 	elif random_number >= 0.5:
 		return('S')
-	
 
-	
 	
